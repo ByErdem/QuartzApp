@@ -18,7 +18,7 @@ namespace QuartzApp
             var userEmailsJob = JobBuilder.Create<SendUserEmailsJob>()
                 .WithIdentity("SendUserEmailsJob")
                 .Build();
-            var userEmailsTrigger = TriggerBuilder.Create()
+            var trigger = TriggerBuilder.Create()
                 .WithIdentity("SendUserEmailsCron")
                 .StartNow()
                 .WithCronSchedule("30 47 10 ? * * *")
@@ -27,7 +27,7 @@ namespace QuartzApp
 
             //Her gün 09:57'de --> 0 57 9 ? * *
 
-            var result = await _scheduler.ScheduleJob(userEmailsJob, userEmailsTrigger);
+            var result = await _scheduler.ScheduleJob(userEmailsJob, trigger);
         }
 
     }
